@@ -1,0 +1,41 @@
+.block {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    color: #272343;
+    align-items: center;
+    justify-items: center;
+}
+
+.elements_separator {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    position: relative;
+    left: 50px;
+}
+
+.block_field {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    /* flex: 0.3; */
+}
+
+.block_field_box {
+    border-radius: 2px;
+    background-color: #bae8e8;
+    color: #272343;
+    padding: 3px;
+    display: inline-block;
+}
+
+.label_wrap {
+    width: 560px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap:break-word;
+}

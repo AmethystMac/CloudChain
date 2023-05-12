@@ -1,0 +1,51 @@
+#chain_page_main {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 100px;
+    height: 86vh;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    background-color: #dcdcdc;
+    color: #272343;
+}
+
+#page_name {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    left: 40px;
+    bottom: 60px;
+    font-size: 30px;
+    align-items: center;
+}
+
+#chain_page_name {
+    background-color: #bae8e8;
+    color: #272343;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+    left: 10px;
+}
+
+#chain_page {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Lato', sans-serif;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding: 40px;
+}
+
+#chain_page_column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#chain_data {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}

@@ -1,0 +1,126 @@
+#home_nav {
+    position: relative;
+    top: 10px;
+    font-family: 'Lato', sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#logo {
+    margin-left: 40px;
+    color: #272343;
+    font-size: 40px;
+    flex: 1;
+}
+
+#link_div {
+    margin-right: 50px;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#norm_link_div {
+    margin-right: 20px;
+}
+
+#norm_link_div:hover {
+}
+
+#norm_link_div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#norm_link_div .link_box {
+    border-radius: 2px;
+    padding: 10px;
+    background-color: #fffffe;
+}
+
+#norm_link_div .link_box:hover {
+    box-shadow: 2px 2px 10px -4px #272343;
+}
+
+.link {
+    font-size: 15px;
+}
+
+.link:link, :visited {
+    color: #272343;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: #272343;
+}
+
+.link:active {
+    text-decoration: none;
+}
+
+/* Yellow login and register links */
+.box_link_div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.box_link_div .link_box {
+    margin-right: 10px;
+    border-radius: 2px;
+    padding: 10px;
+    background-color: #ffd803;
+}
+
+.box_link_div .link_box:hover {
+    box-shadow: 2px 2px 10px -4px #272343;
+}
+
+.line {
+    background-color: #272343;
+    height: 5px;
+    position: relative;
+    top: 10px;
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+#home_page {
+    position: absolute;
+    top: 70px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    height: calc(100% - 70px);
+    width: 100%;
+    background-color: #dcdcdc;
+    font-size: 30px;
+    font-family: 'Lato', sans-serif;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#page_text {
+    color: #272343;
+    position: relative;
+    top: -100px;
+    font-size: 50px;
+}
+
+#home_page .box_link_div .link {
+    position: relative; 
+    left: -450px;
+    height: 40px;
+    width: 160px;
+    font-size: 25px;
+}

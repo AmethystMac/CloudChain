@@ -1,0 +1,27 @@
+#console_page {
+    position: relative;
+    height: 100vh;
+    font-family: 'Lato', sans-serif;
+}
+
+#main_nav {
+    background: #272343;
+    color: #fffffe;
+}
+
+#main_content {
+    padding-bottom: 20px;
+}
+
+#main_footer {
+    position: absolute;
+    background: #272343;
+    color: #fffffe;
+    height: 20px;
+    width: 100%;
+    bottom: 0px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

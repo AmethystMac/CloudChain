@@ -1,0 +1,49 @@
+#chain_form_main {
+    display: flex;
+    position: relative;
+    top: 10vh;
+    height: 70vh;
+    align-items: center;
+    justify-content: center;
+    background-color: #dcdcdc;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.chain_form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chain_form_field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form_input {
+    width: 350px;
+}
+
+.form_select {
+    height: 32px;
+    width: 358px;
+    border-width: 2px;
+    border-radius: 3px;
+    border-color: black;
+}
+
+.form_textarea {
+    border-width: 2px;
+    border-radius: 3px;
+    width: 351px;
+    border-color: black;
+}
+
+.chain_form .form_button {
+    position: relative;
+    left: 130px;
+}
