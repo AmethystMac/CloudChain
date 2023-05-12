@@ -30,5 +30,5 @@
 # Server
 ./server/node_modules
 
-./cloudchain-main.pem
-./ec2-cloudchain-keypair.pem
+cloudchain-main.pem
+ec2-cloudchain-keypair.pem
