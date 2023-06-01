@@ -30,13 +30,7 @@ app
     })
 
     .get("/api/current-user", requireAuth, async (req, res) => {
-        try {
-            return res.json({ "status": "success" });
-
-        } catch(err) {
-            console.log(err);
-            return res.json({ "status": "failed" });
-        }
+        return res.json({ "status": "success", "response": res.locals.username });
     
     })
 

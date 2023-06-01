@@ -17,7 +17,7 @@ const UserChainList = () => {
             if(fetched_data.status === "success") {
 
                 // Fetching the chains owned by the user
-                let response = await fetch(APIEndpoints.EC2 + "/api/chain-list/?type=user&user=" + fetched_data.response);
+                let response = await fetch(APIEndpoints.Blockchain + "/api/chain-list/?type=user&user=" + fetched_data.response);
                 setChain_list(await response.json());
             
             } else {

@@ -11,7 +11,7 @@ const PublicChainList = () => {
     // To fetch the chain list from EC2 instance
     const fetch_chains = async () => {
         try {
-            const response = await fetch(APIEndpoints.EC2 + "/api/chain-list/?type=public");
+            const response = await fetch(APIEndpoints.Blockchain + "/api/chain-list/?type=public");
             setChain_list(await response.json());
         } catch (err) {
             console.log(err);

@@ -1,15 +1,17 @@
 import { useEffect } from "react";
-import { useNavigate, Routes, Route, Link } from "react-router-dom"
+import { useNavigate, useLocation, Routes, Route, Link } from "react-router-dom"
 
 import ChainBrowser from "./ChainBrowser";
 import ChainPage from "./ChainPage";
 import ChainForm from "./ChainForm";
+import { ChainStatusProvider } from "../contexts/ChainStatusProvider";
 import Error from "./Error";
-
+import APIEndpoints from "../data/APIEndpoints.json";
 import "./Console.css"
 
 const Home = () => {
     const navigate = useNavigate();
+    const location = useLocation();
 
     // Checking the authentication status of the user
     const checkAuth = async () => {
@@ -27,7 +29,7 @@ const Home = () => {
         }
     }
 
-    useEffect(() => { checkAuth() }, []);
+    useEffect(() => { checkAuth() }, [location]);
 
     return (
         <div id="console_page">
@@ -39,7 +41,7 @@ const Home = () => {
             <div id="main_content">
                 <Routes>
                     <Route path="/" element={<ChainBrowser />} />
-                    <Route path="/chain/:network_type/:chain_name" element={<ChainPage />} />
+                    <Route path="/chain/:network_type/:chain_name" element={<ChainStatusProvider><ChainPage /></ChainStatusProvider>} />
                     <Route path="/create/chain" element={<ChainForm />} />
                     <Route path="*" element={<Error />} />
                 </Routes>   

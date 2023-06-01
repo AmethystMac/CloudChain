@@ -11,7 +11,7 @@ const ChainTransactionData = (props) => {
 
     const fetch_chain_transactions = async () => {
         try {
-            let response = await fetch(APIEndpoints.EC2 + "/api/chain/get-transactions/?chain_name=" + chain_name + "&network_type=" + network_type);
+            let response = await fetch(APIEndpoints.Blockchain + "/api/chain/get-transactions/?chain_name=" + chain_name + "&network_type=" + network_type);
             let fetched_data = await response.json();
             setChain_transactions(fetched_data.response);
 

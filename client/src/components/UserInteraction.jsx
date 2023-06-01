@@ -8,17 +8,11 @@ const UserInteraction = (props) => {
 
     const [command, setCommand] = useState("");
     const [current_user, setCurrent_user] = useState("");
-    const [user_status, setUser_status] = useState({ "status": "success" });
+    const [user_node, setUser_node] = useState({});
+    const [node_status, setNode_status] = useState({});
     const [command_res, setCommand_res] = useState(undefined);
 
-    const send_request = async () => {
-        setCommand_res(undefined);
-        
-        let response = await fetch(APIEndpoints.EC2 + "/api/chain/command/?chain_name=" + chain_name + "&network_type=" + network_type + "&username=" + current_user + "&command=" + command);
-        setCommand_res(await response.json());
-    }
-
-    const check_user = async () => {
+    const get_user = async () => {
         try {
             let response = await fetch("/api/current-user");
             let data = await response.json();
@@ -31,19 +25,63 @@ const UserInteraction = (props) => {
 
     const check_user_node = async () => {
         try {
-            let owner = chain_name.split("-")[1];
-            if(owner === current_user) {
+            if(current_user === chain_name.split("-")[1]) {
                 setCurrent_user("main");
-                setUser_status({ "status": "success" });
+                setUser_node({ "status": "success" });
 
             } else {
-                let response = await fetch(APIEndpoints.EC2 + "/api/chain/check-user-node/?chain_name=" + chain_name + "&network_type=" + network_type + "&username=" + current_user);
-                setUser_status(await response.json());
+                let response = await fetch(APIEndpoints.Blockchain + "/api/chain/check-user-node/?chain_name=" + chain_name + "&network_type=" + network_type + "&username=" + current_user);
+                setUser_node(await response.json());
 
             }
         } catch (err) {
             console.log(err);
         }
+    }
+
+    const fetch_node_status = async () => {
+        try {
+            // Check if chain is running
+            let response = await fetch(APIEndpoints.Blockchain + "/api/chain-node-status/?chain_name=" + chain_name + "&network_type=" + network_type + "&username=" + current_user);
+            setNode_status(await response.json());
+
+        } catch (err) {
+            setNode_status({ "status": "failed" });
+
+        }
+    }
+
+    const create_node = async () => {
+        try {
+            await fetch(APIEndpoints.Blockchain + "/api/chain-new-node/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ chain_name: chain_name.split('-')[0], network_type, chain_owner: chain_name.split('-')[1], username: current_user })
+            });
+            setUser_node({ "status": "success" });
+
+        } catch (err) {
+            console.log(err);
+
+        }
+    };
+
+    const start_chain_node = async () => {
+        try {
+            await fetch(APIEndpoints.Blockchain + "/api/chain-start-node/?chain_name=" + chain_name.split('-')[0] + "&network_type=" + network_type + "&chain_owner=" + chain_name.split('-')[1] + "&username=" + current_user);
+            setNode_status({ "status": "success" });
+
+        } catch (err) {
+            console.log(err);
+
+        }
+    };
+
+    const send_request = async () => {
+        setCommand_res(undefined);
+        
+        let response = await fetch(APIEndpoints.Blockchain + "/api/chain/command/?chain_name=" + chain_name + "&network_type=" + network_type + "&username=" + current_user + "&command=" + command);
+        setCommand_res(await response.json());
     }
 
     const get_command_output = () => {
@@ -64,31 +102,44 @@ const UserInteraction = (props) => {
         }
     }
 
-    useEffect(() => { check_user(); }, []);
+    useEffect(() => { get_user(); }, []);
     useEffect(() => {
-    if (current_user !== "") {
-        check_user_node();
-    }
+        if (current_user !== "") {
+            check_user_node();
+        }
     }, [current_user]);
+    useEffect(() => {
+        if (user_node && user_node.status === "success") {
+            fetch_node_status();
+        }
+    }, [user_node])
 
     return (
         <div id="user_interaction">
-            {( user_status.status === "success" ? 
-                <div id="command_form_main">
-                    <form id="command_form">
-                        <div className="form_field">
-                            <label className="command_form_label">Enter Command</label>
-                            <input className="command_form_input" type="text" value={command} onChange={(text) => setCommand(text.target.value)}/><br/>
-                        </div>
-                        <button className="command_form_button" type="button" onClick={send_request}>Enter</button>
-                    </form>
-                    <label id="command_response">{get_command_output()}</label>
-                </div> : 
-                ( user_status.error === "2" ? 
-                <div className="error">
-                    <div className="error_name">User node not found!</div>
-                    <div className="error_suggestion"><div className="error_smol">Create a new one:</div><div className="error_sol">{"sh ./scripts/shell/CreateNode.sh 234 private foo 123"}</div></div>
-                </div> : <div className="error">Error!</div> ))}
+            {(
+                user_node.status ? 
+                    (user_node.status === "success" ? 
+                        (node_status.status === "success" ?
+                            <div id="command_form_main">
+                                <form id="command_form">
+                                    <div className="form_field">
+                                        <label className="command_form_label">Enter Command</label>
+                                        <input className="command_form_input" type="text" value={command} onChange={(text) => setCommand(text.target.value)}/><br/>
+                                    </div>
+                                    <button className="command_form_button" type="button" onClick={send_request}>Enter</button>
+                                </form> 
+                                <label id="command_response">{get_command_output()}</label>
+                            </div> : 
+                            (node_status.error === "2" ?
+                                <div><button className="command_form_button" type="button" onClick={() => { start_chain_node(); }}>Click here</button> to start node</div> : 
+                                <div>Loading...</div>)) :
+                    ( user_node.error === "2" ? 
+                    <div className="error">
+                        <div className="error_name">User node not found</div>
+                        <div className="error_suggestion"><button onClick={() => { create_node(); }}>Click here</button><div className="error_smol">to create a new one</div></div>
+                    </div> : <div className="error">Error!</div>)) :
+                <div>Loading...</div>
+            )}
         </div>
     )
 }

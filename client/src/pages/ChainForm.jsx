@@ -30,7 +30,7 @@ const ChainForm = () => {
             }
             
             // Sending an API request to create a blockchain
-            response = await fetch(APIEndpoints.EC2 + "/api/create-chain", {
+            response = await fetch(APIEndpoints.Blockchain + "/api/chain-new-service", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, chain_name, network_type, crypto, genesis })

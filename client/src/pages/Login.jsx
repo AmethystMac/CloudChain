@@ -1,13 +1,11 @@
 import { useRef, useState, useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom";
 
-import useAuth from "../hooks/useAuth";
+import APIEndpoints from "../data/APIEndpoints.json";
 import "./Login.css";
 
 const Login = () => {
     const navigate = useNavigate();
-
-    const { setAuth } = useAuth();
 
     const usernameRef = useRef();
 
@@ -28,13 +26,13 @@ const Login = () => {
 
             const fetched_data = await response.json();
             if(fetched_data.status === "success") {
-                setAuth({ username, password });
                 setUsername("");
                 setPassword("");
 
                 navigate("/console");
 
             } else {
+                console.log(fetched_data);
                 navigate("/");
                 
             }
@@ -68,7 +66,7 @@ const Login = () => {
                         onChange={(text) => setPassword(text.target.value)}
                     />
                 </div>
-                <button className="form_button" type="button" onClick={verify_credentials}>Enter</button>
+                <button className="form_button" type="button" onClick={() => { verify_credentials() }}>Enter</button>
             </form>
             <div className="plain_text">
                 Experience the power of decentralized technology with our <br/>

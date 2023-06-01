@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 
+import APIEndpoints from "../data/APIEndpoints.json";
 import "./Login.css";
 
 const Register = () => {
@@ -49,7 +50,7 @@ const Register = () => {
                     <label className="form_label">Password</label>
                     <input className="form_input" type="password" value={password} onChange={(text) => setPassword(text.target.value)} />
                 </div>
-                <button className="form_button" type="button" onClick={verify_credentials}>Enter</button>
+                <button className="form_button" type="button" onClick={() => { verify_credentials() }}>Enter</button>
             </form>
             <div className="plain_text">
                 Join the decentralized revolution and start building your own blockchain-based<br/>

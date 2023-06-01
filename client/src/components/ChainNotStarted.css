@@ -1,0 +1,55 @@
+.error {
+    text-align: justify;
+    border-radius: 20px;
+    margin-left: 200px;
+    margin-right: 200px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-size: 20px;
+    background-color: #272343;
+    color: #fffffe;
+    gap: 20px;
+}
+
+.error_body {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    background-color: #fffffe;
+    color: #272343;
+    gap: 10px;
+}
+
+.error_start_btn {
+    font-weight: bold;
+    font-size: 20px;
+    border: 0px;
+    border-radius: 2px;
+    padding: 10px;
+    color: #272343;
+    background-color: #ffd803;
+}
+
+.error_start_btn:hover {
+    box-shadow: 2px 2px 10px -4px #272343;
+}
+
+.error_sections {
+    padding-left: 50px;
+    padding-right: 50px;
+    text-align: justify;
+}
+
+.error_heading {
+    font-size: 30px;
+    color: #fffffe;
+}
+
+.error_text {
+    color: #ffd803;
+    white-space: nowrap;
+}
